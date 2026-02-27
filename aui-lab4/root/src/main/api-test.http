@@ -1,0 +1,66 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+###
+### 1️ Utwórz nowy kurs
+POST http://localhost:8080/api/courses
+Content-Type: application/json
+
+{
+  "name": "Matematyka",
+  "description": "Podstawy analizy matematycznej"
+}
+
+> {% client.global.set("courseId", response.body.id); %}
+
+### 2️ Pobierz wszystkie kursy
+GET http://localhost:8080/api/courses
+Accept: application/json
+
+### 3️ Pobierz jeden kurs po ID
+GET http://localhost:8080/api/courses/{{courseId}}
+Accept: application/json
+
+### 4️ Zaktualizuj kurs
+PUT http://localhost:8080/api/courses/{{courseId}}
+Content-Type: application/json
+
+{
+  "name": "Zaawansowana Matematyka",
+  "description": "Analiza matematyczna II"
+}
+
+### 5️ Dodaj studenta do kursu
+POST http://localhost:8080/api/courses/{{courseId}}/students
+Content-Type: application/json
+
+{
+  "fullName": "Jan Kowalski",
+  "grade": 4.5
+}
+
+> {% client.global.set("studentId", "88044069-ab5c-45c2-87e4-9d44f6926579"); %}
+
+### 6️ Pobierz wszystkich studentów
+GET http://localhost:8080/api/students
+Accept: application/json
+
+### 7️ Pobierz studentów z kursu
+GET http://localhost:8080/api/courses/{{courseId}}/students
+Accept: application/json
+
+### 8️ Zaktualizuj dane studenta
+PUT http://localhost:8080/api/students/336a1538-4498-4ed0-95fa-9d4a4101cc0b
+Content-Type: application/json
+
+{
+  "fullName": "Jan Nowak",
+  "grade": 5.0
+}
+
+### 9️ Usuń studenta
+DELETE http://localhost:8080/api/students/336a1538-4498-4ed0-95fa-9d4a4101cc0b
+
+### 10 Usuń kurs (razem ze studentami)
+DELETE http://localhost:8080/api/courses/{{courseId}}

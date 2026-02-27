@@ -1,0 +1,39 @@
+# Gateway Tests Dynamic
+
+###
+# @name Create New Element
+POST http://localhost:8080/elements
+Content-Type: application/json
+
+{
+  "name": "Element1"
+}
+
+###
+# @name Get Element by ID
+GET http://localhost:8080/elements/{{elementId}}
+Accept: application/json
+
+###
+# @name Update Element
+PUT http://localhost:8080/elements/{{elementId}}
+Content-Type: application/json
+
+{
+  "name": "Element1 Updated"
+}
+
+###
+# @name Delete Element
+DELETE http://localhost:8080/elements/{{elementId}}
+
+###
+# @name Get All Elements
+GET http://localhost:8080/elements
+Accept: application/json
+
+###
+# @name Search Elements by Name
+GET http://localhost:8080/elements/search?
+    name=Element1
+Accept: application/json
