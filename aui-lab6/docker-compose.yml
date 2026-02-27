@@ -1,0 +1,44 @@
+services:
+
+    frontend:
+        build: 
+            context: C:/Users/zucek/Inf_Sem5/aui-lab5-app
+            dockerfile: Dockerfile.docker
+        ports:
+            - "8080:80"
+        depends_on:
+            - courses-service
+            - students-service
+        networks:
+            - aui-network
+
+    courses-service:
+        build:  
+            context: C:\Users\zucek\IdeaProjects\aui_lab4_v3\Course_service_2
+            dockerfile: Dockerfile
+        extra_hosts:
+            - "localhost:host-gateway"
+        ports:
+            - "8081:8081"
+        environment:
+            - SERVER_PORT=8081
+            - STUDENTS_SERVICE_URL=http://students-service:8082
+        networks:
+            - aui-network
+
+    students-service:
+        build:  
+            context: C:\Users\zucek\IdeaProjects\aui_lab4_v3\student_service
+            dockerfile: Dockerfile
+        ports:
+            - "8082:8082"
+        environment:
+            - SERVER_PORT=8082
+            - COURSES_SERVICE_URL=http://courses-service:8081
+        networks:
+            - aui-network
+
+    
+networks:
+    aui-network:
+        driver: bridge
