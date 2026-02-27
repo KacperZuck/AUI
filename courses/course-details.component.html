@@ -1,0 +1,52 @@
+<h2>{{ course?.name }}</h2>
+
+<p><b>Description:</b> {{ course?.description }}</p>
+
+<br>
+<h3>Students in course:</h3>
+
+ 
+@let student = student$ | async;
+
+  @if (student !== null && student !== undefined) {
+    @if (student.length > 0) {
+<table>
+      @for (student of student; track student.id) {
+        <tr>
+          <td>{{ student.fullname }}</td>
+          <td>
+            <button  (click)="detailsStudent(student.id)">View</button>
+            <button  (click)="editStudent(student.id)">Edit</button>
+            <button  (click)="deleteStudent(student.id)">Delete</button>
+          </td>
+        </tr>
+        <br>
+      }
+    
+    </table>
+  } @else {
+      <div class="alert alert-warning">
+        No categories found. Click "Add New Category" to create one.
+      </div>
+    }
+  } @else {
+    <div class="d-flex justify-content-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <!-- <span class="visually-hidden">Loading...</span> -->
+      </div>
+    </div>
+  }
+
+<button (click)="addStudent()">Dodaj studenta</button>
+<br><br>  
+<a [routerLink]="['/courses']">Back</a>
+
+<!--
+
+
+          <a> | </a>
+          <td>{{ student.grade }}</td>
+          <a> | </a>
+          <td>{{ student.courseName}}</td>
+          
+-->

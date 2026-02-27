@@ -1,0 +1,42 @@
+
+<div>
+  <h2>Students</h2>
+  <h2></h2>
+</div>
+  
+@let student = student$ | async;
+
+  @if (student !== null && student !== undefined) {
+    @if (student.length > 0) {
+<table>
+      @for (student of student; track student.id) {
+        <tr>
+          <td>{{ student.fullname }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="details(student.id)">View</button>
+            <button class="btn btn-sm btn-warning me-2" (click)="edit(student.id)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="delete(student.id)">Delete</button>
+          </td>
+        </tr>
+        <br>
+      }
+    
+    </table>
+  } @else {
+      <div class="alert alert-warning">
+        No categories found. Click "Add New Category" to create one.
+      </div>
+    }
+  } @else {
+    <div class="d-flex justify-content-center my-5">
+      <div class="spinner-border text-primary" role="status">
+        <!-- <span class="visually-hidden">Loading...</span> -->
+      </div>
+    </div>
+  }
+
+  <!--
+     <td>{{ student.grade }}</td>
+          <td>{{ student.courseName}}</td>
+       
+  -->

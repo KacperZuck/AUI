@@ -1,0 +1,17 @@
+<h2>Add Course</h2>
+
+<form [formGroup]="form" (ngSubmit)="save()">
+
+  <label for="name">Name:</label>
+  <input id="name" type="text" formControlName="name">
+  <br>
+  
+  <label for="description">Description:</label>
+  <input id="description" type="text" formControlName="description">
+  <br>
+  <br>
+  <button type="submit" [disabled]="form?.invalid">Save</button>
+</form>
+
+<br>
+<a [routerLink]="['/courses']">Back to Courses</a>

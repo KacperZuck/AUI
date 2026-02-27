@@ -1,0 +1,8 @@
+<div *ngIf="student$ | async as student;">
+    
+  <h2>{{ student.fullname }}</h2>
+  <p><span>Grade:</span> <b>{{ student.grade }}</b></p>
+  <p><span>Course name:</span> <b>{{ student.courseName }}</b></p>
+
+  <a [routerLink]="['/students']">Back to students</a>
+</div>
